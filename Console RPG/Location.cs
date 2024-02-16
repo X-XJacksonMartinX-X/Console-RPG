@@ -9,14 +9,24 @@ namespace Console_RPG
         public string name;
         public string description;
         public int level;
+        public string option1;
+        public string option2;
+        public string option3;
+        public string option4;
+        public string option5;
 
         public Location north, east, south, west;
 
-        public Location(string name, string description, int level)
+        public Location(string name, string description, int level,  string option1,  string option2,  string option3, string option4, string option5)
         {
             this.name = name;
             this.description = description;
             this.level = level;
+            this.option1 = option1;
+            this.option2 = option2;
+            this.option3 = option3;
+            this.option4 = option4;
+            this.option5 = option5;
         }
 
         public void SetNearbyLocations(Location north, Location east, Location south, Location west)
@@ -37,6 +47,15 @@ namespace Console_RPG
         }
         public void Resolve()
         {
+
+            Program.PrintLine($"You are at {this.name}, {this.description}.");
+            Program.PrintLine($"What do you do, {name}?");
+            Program.PrintLine(this.option1);
+            Program.PrintLine(this.option2);
+            Program.PrintLine(this.option3);
+            Program.PrintLine(this.option4);
+            Program.PrintLine(this.option5);
+
             if (!(this.north is null))
                 Console.WriteLine($"North: {this.north.name}");
             if (!(this.east is null))

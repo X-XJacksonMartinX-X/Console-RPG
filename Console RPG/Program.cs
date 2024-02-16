@@ -16,12 +16,12 @@ namespace Console_RPG
 
 
 
-            Location playerHouse = new Location("Your house", "The house you grew up in.", 0);
-            Location brightWoods = new Location("The Bright Woods", "You've been lost in there before...", 1);
-            Location darkWoods = new Location("The woods", "Your mother told you to never go this deep...", 2);
-            Location town = new Location("The town", "You go there for food, and supplies sometimes...", 0);
-            Location theTree = new Location("The Tree", "A large Mahogany tree,  atop a small hill..", 0);
-            Location lake = new Location("The Lake", "A large lake at the end of the woods.", 0);
+            Location playerHouse = new Location("Your house", "The house you grew up in.", 0, "Make some food", "Go back to bed", "Read a book", "Look Outside", null);
+            Location brightWoods = new Location("The Bright Woods", "You've been lost in there before...", 1, "", "", "", "", "");
+            Location darkWoods = new Location("The woods", "Your mother told you to never go this deep...", 2, "", "", "", "", "");
+            Location town = new Location("The town", "You go there for food, and supplies sometimes...", 0, "", "", "", "", "");
+            Location theTree = new Location("The Tree", "A large Mahogany tree,  atop a small hill..", 0, "", "", "", "", "");
+            Location lake = new Location("The Lake", "A large lake at the end of the woods.", 0, "", "", "", "", "");
 
             playerHouse.SetNearbyLocations(town, brightWoods, null, null);
             brightWoods.SetNearbyLocations(null, darkWoods, null, playerHouse);
@@ -49,7 +49,7 @@ namespace Console_RPG
                 else if (ifready == "no" || ifready == "nope" || ifready == "not" || ifready == "nuh uh" || ifready == "nah")
                 {
                     ready = false;
-                    PrintLine($"See you next time {name}...");
+                    PrintLineOminous($"See you next time {name}...");
                     Thread.Sleep(2000);
                     System.Environment.Exit(1);
                 }
@@ -62,23 +62,51 @@ namespace Console_RPG
             if (ready == true)
             {
                 Game = true;
+                PrintLine("You awaken in your bed, looking around the walls are worn. You wonder the last time you ate, what do you do?");
             }
             while (Game == true)
             {
-                
+                playerHouse.Resolve();     
             }
         }
 
         public static void Print(string output)
         {
+            if (output is null)
+            {
+                return;
+            }
+
             for (int i = 0; i < output.Length; ++i)
             {
+
+
                 Console.Write(output[i]);
                 Thread.Sleep(10);
             }
         }
         public static void PrintLine(string output)
         {
+            if(output is null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < output.Length; ++i)
+            {
+                Console.Write(output[i]);
+                Thread.Sleep(10);
+            }
+
+            Console.WriteLine();
+        }
+        public static void PrintLine(string output)
+        {
+            if (output is null)
+            {
+                return;
+            }
+
             for (int i = 0; i < output.Length; ++i)
             {
                 Console.Write(output[i]);
@@ -89,3 +117,10 @@ namespace Console_RPG
         }
     }
 }
+
+
+// if (i == output.Length - 2)
+// {
+//    Thread.Sleep(90);
+// }
+// Makes the last letter slower than the others. Could maybe do something similar for a whole sentence?
