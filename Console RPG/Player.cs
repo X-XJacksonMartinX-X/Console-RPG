@@ -6,6 +6,8 @@ namespace Console_RPG
 {
     class Player : Entity
     {
+        public static List<Item> Inventory = new List<Item>();
+        public static int coinCount = 0;
         public static Player player = new Player("Player", 50, 20, new Stats(10, 10, 10, 10));
 
 

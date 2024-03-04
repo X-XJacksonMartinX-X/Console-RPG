@@ -19,10 +19,10 @@ namespace Console_RPG
 
             PrintLine("Welcome to 'The Truth', a personality test + RPG. What is your name player?");
             string playerName = Console.ReadLine();
-            PrintLine($"Hello {playerName}, it's great to finally meet you!");
+            PrintLine($"Hello {PrintName(playerName)}, it's great to finally meet you!");
             PrintLine("In this game you will go on a short journey, to find your truth, whatever it may be.");
             bool ready = false;
-            bool Game = false;
+            bool game = false;
             while (ready == false)
             {
                 PrintLine($"Are you ready {playerName}?");
@@ -47,10 +47,10 @@ namespace Console_RPG
             }
             if (ready == true)
             {
-                Game = true;
+                game = true;
                 PrintLine("You awaken in your bed, looking around the walls are worn. You wonder the last time you ate, what do you do?");
             }
-            while (Game == true)
+            while (game == true)
             {
                 Location.brightWoods.Resolve(new List<Player>() {Player.player});     
             }
@@ -112,6 +112,17 @@ namespace Console_RPG
                 }
             }
             Console.WriteLine();
+        }
+        public static object PrintName(string output)
+        {
+            for (int i = 0; i < output.Length; ++i)
+            {
+                Console.Write(output[i]);
+                Thread.Sleep(10);
+            }
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ResetColor();
+            return output;
         }
     }
 }

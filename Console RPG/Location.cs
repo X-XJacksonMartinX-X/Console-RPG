@@ -10,7 +10,7 @@ namespace Console_RPG
         public static Location playerHouse = new Location("Home", "The house you grew up in.", 0, "Make some food", "Go back to bed", "Read a book", "Look Outside", null);
         public static Location brightWoods = new Location("The Bright Woods", "You've been lost in here before...", 1, "Kick a tree", "", "", "", "", new Battle(new List<Enemy>() { Enemy.slime }));
         public static Location darkWoods = new Location("The woods", "Your mother told you to never go this deep...", 2, "", "", "", "", "", new Battle(new List<Enemy>() { Enemy.wolf, Enemy.slime }));
-        public static Location town = new Location("The town", "You go there for food, and supplies sometimes...", 0, "", "", "", "", "");
+        public static Location town = new Location("The town", "You go there for food, and supplies sometimes...", 0, "", "", "", "", "", new Shop("Larry", new List<Item>() { }));
         public static Location theTree = new Location("The Tree", "A large Mahogany tree,  atop a small hill..", 0, "", "", "", "", "");
         public static Location lake = new Location("The Lake", "A large lake at the end of the woods.", 0, "", "", "", "", "", new Battle(new List<Enemy>() { Enemy.dragon }));
 
@@ -23,11 +23,12 @@ namespace Console_RPG
         public string option3;
         public string option4;
         public string option5;
-        public Battle battle;
+        public Event feature;
+
 
         public Location north, east, south, west;
 
-        public Location(string name, string description, int level,  string option1,  string option2,  string option3, string option4, string option5, Battle battle = null)
+        public Location(string name, string description, int level,  string option1,  string option2,  string option3, string option4, string option5, Event feature = null)
         {
             this.name = name;
             this.description = description;
@@ -37,7 +38,7 @@ namespace Console_RPG
             this.option3 = option3;
             this.option4 = option4;
             this.option5 = option5;
-            this.battle = battle;
+            this.feature = feature;
         }
 
         public void SetNearbyLocations(Location north, Location east, Location south, Location west)
@@ -79,8 +80,8 @@ namespace Console_RPG
             Program.PrintLine(this.option4);
             Program.PrintLine(this.option5);
 
-            if(!(battle is null))
-            battle.Resolve(players);
+            if(!(feature is null))
+            feature.Resolve(players);
 
             if (!(this.north is null))
                 Console.WriteLine($"North: {this.north.name}");
